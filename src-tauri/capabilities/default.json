@@ -7,6 +7,11 @@
     "urls": ["https://*.*"]
   },
   "permissions": [
+    "core:default",
+
+    "fs:default",
+    "path:default",
+    "dialog:default",
     "shell:allow-open",
     "core:window:allow-theme",
     "core:window:allow-start-dragging",

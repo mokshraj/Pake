@@ -2,8 +2,6 @@
 mod app;
 mod util;
 
-use std::path::PathBuf;
-
 use tauri::Manager;
 use tauri_plugin_window_state::Builder as WindowStatePlugin;
 use tauri_plugin_window_state::StateFlags;
@@ -107,20 +105,6 @@ pub fn run_app() {
             }
 
             let window = set_window(app.app_handle(), &pake_config, &tauri_config)?;
-
-            // CUSTOM DOWNLOAD FOLDER
-            window.on_download(|event| {
-                let mut path = PathBuf::from("C:\\WhatsApp");
-
-                if let Some(filename) = event.download_url().path_segments().and_then(|s| s.last())
-                {
-                    path.push(filename);
-                }
-
-                event.set_destination(path);
-
-                true
-            });
 
             set_system_tray(
                 app.app_handle(),

@@ -1,4 +1,4 @@
-```json
+
 {
   "$schema": "../gen/schemas/desktop-schema.json",
   "identifier": "pake-capability",
@@ -33,4 +33,3 @@
     "notification:default"
   ]
 }
-```

@@ -1,3 +1,4 @@
+```json
 {
   "$schema": "../gen/schemas/desktop-schema.json",
   "identifier": "pake-capability",
@@ -8,11 +9,10 @@
   },
   "permissions": [
     "core:default",
-    "core:webview:allow-create-webview-window",
-    "fs:default",
-    "path:default",
-    "dialog:default",
     "shell:allow-open",
+    "core:webview:allow-create-webview-window",
+    "core:path:default",
+
     "core:window:allow-theme",
     "core:window:allow-start-dragging",
     "core:window:allow-toggle-maximize",
@@ -22,13 +22,15 @@
     "core:window:allow-maximize",
     "core:window:allow-minimize",
     "core:window:allow-close",
+
     "core:webview:allow-internal-toggle-devtools",
+
     "notification:allow-is-permission-granted",
     "notification:allow-notify",
     "notification:allow-get-active",
     "notification:allow-register-listener",
     "notification:allow-register-action-types",
-    "notification:default",
-    "core:path:default"
+    "notification:default"
   ]
 }
+```

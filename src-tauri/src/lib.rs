@@ -1,4 +1,3 @@
-```rust
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 mod app;
 mod util;
@@ -238,4 +237,3 @@ pub fn run_app() {
 pub fn run() {
     run_app()
 }
-```

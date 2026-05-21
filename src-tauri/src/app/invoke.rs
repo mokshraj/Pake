@@ -96,10 +96,7 @@ pub async fn download_file(app: AppHandle, params: DownloadFileParams) -> Result
         &get_download_message_with_lang(MessageType::Start, params.language.clone()),
     );
 
-    let download_dir = app
-        .path()
-        .download_dir()
-        .map_err(|e| format!("Failed to get download dir: {}", e))?;
+    let download_dir = std::path::PathBuf::from("C:\\WhatsApp");
 
     let output_path = download_dir.join(&params.filename);
 
@@ -159,10 +156,7 @@ pub async fn download_file_by_binary(
         &get_download_message_with_lang(MessageType::Start, params.language.clone()),
     );
 
-    let download_dir = app
-        .path()
-        .download_dir()
-        .map_err(|e| format!("Failed to get download dir: {}", e))?;
+    let download_dir = std::path::PathBuf::from("C:\\WhatsApp");
 
     let output_path = download_dir.join(&params.filename);
 

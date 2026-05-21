@@ -92,7 +92,6 @@ pub fn run_app() {
             clear_cache_and_restart,
         ])
         .setup(move |app| {
-
             app.manage(MultiWindowState::new(
                 pake_config.clone(),
                 tauri_config.clone(),
@@ -111,13 +110,9 @@ pub fn run_app() {
 
             // CUSTOM DOWNLOAD FOLDER
             window.on_download(|event| {
-
                 let mut path = PathBuf::from("C:\\WhatsApp");
 
-                if let Some(filename) = event
-                    .download_url()
-                    .path_segments()
-                    .and_then(|s| s.last())
+                if let Some(filename) = event.download_url().path_segments().and_then(|s| s.last())
                 {
                     path.push(filename);
                 }
@@ -135,19 +130,13 @@ pub fn run_app() {
                 multi_window,
             )?;
 
-            set_global_shortcut(
-                app.app_handle(),
-                activation_shortcut,
-                init_fullscreen,
-            )?;
+            set_global_shortcut(app.app_handle(), activation_shortcut, init_fullscreen)?;
 
             if !start_to_tray {
                 let window_clone = window.clone();
 
                 tauri::async_runtime::spawn(async move {
-                    tokio::time::sleep(
-                        tokio::time::Duration::from_millis(WINDOW_SHOW_DELAY)
-                    ).await;
+                    tokio::time::sleep(tokio::time::Duration::from_millis(WINDOW_SHOW_DELAY)).await;
 
                     let _ = window_clone.show();
 
@@ -157,9 +146,7 @@ pub fn run_app() {
                             let _ = window_clone.set_fullscreen(true);
                             let _ = window_clone.set_focus();
                         } else {
-                            tokio::time::sleep(
-                                tokio::time::Duration::from_millis(30)
-                            ).await;
+                            tokio::time::sleep(tokio::time::Duration::from_millis(30)).await;
 
                             let _ = window_clone.set_focus();
                         }
@@ -171,21 +158,16 @@ pub fn run_app() {
         })
         .on_window_event(move |_window, _event| {
             if let tauri::WindowEvent::CloseRequested { api, .. } = _event {
-
                 if hide_on_close && _window.label() == "pake" {
-
                     let window = _window.clone();
 
                     tauri::async_runtime::spawn(async move {
-
                         #[cfg(target_os = "macos")]
                         {
                             if window.is_fullscreen().unwrap_or(false) {
                                 let _ = window.set_fullscreen(false);
 
-                                tokio::time::sleep(
-                                    Duration::from_millis(900)
-                                ).await;
+                                tokio::time::sleep(Duration::from_millis(900)).await;
                             }
                         }
 
@@ -209,14 +191,11 @@ pub fn run_app() {
         })
         .build(tauri::generate_context!())
         .unwrap_or_else(|error| {
-            eprintln!(
-                "[Pake] Fatal error while building Tauri application: {error}"
-            );
+            eprintln!("[Pake] Fatal error while building Tauri application: {error}");
 
             std::process::exit(1);
         })
         .run(|_app, _event| {
-
             #[cfg(target_os = "macos")]
             if let tauri::RunEvent::Reopen {
                 has_visible_windows,
@@ -224,7 +203,6 @@ pub fn run_app() {
             } = _event
             {
                 if !has_visible_windows {
-
                     if let Some(window) = _app.get_webview_window("pake") {
                         let _ = window.show();
                         let _ = window.set_focus();

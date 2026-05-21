@@ -8,7 +8,7 @@
   },
   "permissions": [
     "core:default",
-
+    "core:webview:allow-create-webview-window",
     "fs:default",
     "path:default",
     "dialog:default",
